@@ -1,0 +1,68 @@
+/*
+    Overrides for the default bootstrap theme go here.
+
+    Hint: This does not only mean colors but also spacing, modals etc.
+
+    See bootstrap/scss/variables.scss for possible variables.
+    Don't forget to remove the '!default' attribute when copying variables
+    from the aforementioned file.
+
+    Note that you should not (and can't) use other bootstrap variables/mixins here.
+*/
+
+/** Colors **/
+/* Basalt */
+$gray-dark:                 #333333;
+$basalt:                    $gray-dark;
+/* Aluminium */
+$gray:                      #999999;
+$aluminum:                  $gray;
+/* Silber */
+$gray-light:                #e8e8e8;
+$silber:                    $gray-light;
+/* Hellgrau */
+$gray-lighter:              #f4f4f4;
+$hellgrau:                  $gray-lighter;
+
+/* Baby-Blau */
+$brand-info:                #b9e0e9;
+$baby-blau:                 $brand-info;
+/* Melonen-Grün */
+$brand-success:             #aee299;
+$melonen-grün:              $brand-success;
+/* Nelken-Rosa */
+$brand-danger:              #e9ccdc;
+$nelken-rosa:               $brand-danger;
+
+$brand-inverse:             $gray-dark;
+
+
+/** Fonts **/
+$font-family-sans-serif: "Soleil Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif: "Karmina Regular", Georgia, "Times New Roman", Times, serif;
+
+/** Buttons **/
+
+/* Conversion Button - Zum Konfigurator */
+$btn-primary-color:             $gray-dark;
+$btn-primary-bg:                #fff;
+$btn-primary-border:            $gray-lighter;
+$btn-primary-active-bg:         $gray-lighter;
+
+/* Produktinformationen */
+$btn-danger-color:              $gray-dark;
+$btn-danger-bg:                 $brand-danger;
+$btn-danger-border:             $brand-danger;
+$btn-danger-active-bg:          #f2e0ea;
+
+/* Mehr erfahren */
+$btn-info-color:                $gray-dark;
+$btn-info-bg:                   $brand-info;
+$btn-info-border:               $brand-info;
+$btn-info-active-bg:            #d4ebf1;
+
+/* Zur Kasse */
+$btn-buy-color:                 $gray-dark;
+$btn-buy-bg:                    $brand-success;
+$btn-buy-border:                $brand-success;
+$btn-buy-active:                lighten($brand-success, 5%);

@@ -1,0 +1,93 @@
+.gisela-modal {
+
+  // This does absolutely nothing except working around an issue with min-height, flexbox column and justify content.
+  // See https://connect.microsoft.com/IE/feedback/details/802625/min-height-and-flexbox-flex-direction-column-dont-work-together-in-ie-10-11-preview
+  // This has to be important since ngbootstrap sets it to block via inline style
+  // In short: Modals won't be vertically centered on any IE without this line.
+  display: flex !important;
+
+  .modal-dialog {
+
+    margin: 0;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    background-color: $gray-lighter;
+
+    .modal-content {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+
+      // Make the modal scrollable on low-height screens
+      height: auto;
+      overflow-x: hidden;
+    }
+
+    .modal-header, .modal-header h4 {
+      background-color: $gray-light;
+      text-align: center;
+      font-family: $font-family-sans-serif;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: bold;
+      position: relative;
+      max-height: 60px;
+      min-height: 60px;
+      overflow: hidden;
+      padding: 0;
+      line-height: 60px;
+    }
+
+    .modal-header .close-button {
+      display: inline-block;
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      bottom: 12px;
+      width: 35px;
+      background-image: url('../assets/img/close.svg');
+      background-position: 50% 50%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .gisela-modal {
+    padding: 20px 0 20px 0;
+
+    .modal-dialog {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      background-color: transparent;
+
+      .modal-body {
+        background-color: $gray-lighter;
+      }
+
+      .modal-header .close-button {
+        background-image: url('../assets/img/close_desktop.svg');
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .gisela-modal {
+    padding: 20px;
+  }
+
+  .modal-body {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+
+}
+

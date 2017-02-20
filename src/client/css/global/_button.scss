@@ -1,0 +1,106 @@
+// This is so the button selector is more specific than the one bootstrap uses
+.gisela {
+
+    // Global button styles
+    .btn, button, [type="button"] {
+        padding: 16px 35px;
+        font-size: 12px;
+        border-radius: 0.1rem;
+        font-family: $font-family-sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+
+        // The primary button is the only one that has a border
+        border: 0;
+
+        // Remove all outlines, ever.
+        outline: none;
+        &:hover, &:active, &:visited, &:focus {
+            outline: none;
+        }
+
+        // Bootstrap does not give full control over the buttons via its default variables,
+        // so we need to add some button specific configuration
+
+        // Primary button (white, Conversion Button - Zum Konfigurator)
+        &.btn-primary {
+            // The primary button is the only one that has an outline
+            border: 1px solid $gray-lighter;
+
+            &:hover, &:visited, &:focus {
+                background-color: $btn-primary-bg;
+            }
+
+            &:active {
+                background-color: $btn-primary-active-bg;
+            }
+        }
+
+        // "Daner" button (red, Produktinformationen)
+        &.btn-danger {
+            &:hover, &:visited, &:focus {
+                background-color: $btn-danger-bg;
+            }
+
+            &:active {
+                background-color: $btn-danger-active-bg;
+            }
+        }
+
+        // "Info" button (blue, Mehr erfahren)
+        &.btn-danger {
+
+            // Font color for this button is white (other than all other buttons)
+            color: #fff;
+
+            &:hover, &:visited, &:focus {
+                background-color: $btn-danger-bg;
+            }
+
+            &:active {
+                background-color: $btn-danger-active-bg;
+            }
+        }
+
+        // "Zur Kasse" button (melon-green, Zur Kasse)
+        &.btn-buy {
+
+            // Font color for this button
+            color: $btn-buy-color;
+            background-color: $btn-buy-bg;
+
+            &:hover, &:visited, &:focus {
+                background-color: $btn-buy-active;
+            }
+
+            &:active {
+                background-color: $btn-buy-bg;
+            }
+        }
+
+        // In the design, the buttons seem to be roughly 80%
+        // of the page, but this looks strange on very small or
+        // very large mobile devices, so we use the following instead
+        width: 100%;
+        max-width: 240px;
+
+        // Specific button configuration for non-mobile
+        // views (tablet and desktop)
+        @include media-breakpoint-up(xl) {
+            width: auto;
+            max-width: none;
+        }
+
+        // Tablet mode only
+        @include media-breakpoint-between(md, lg) {
+            font-size: 14px;
+            padding: 18px 15px;
+        }
+
+        // Desktop mode only
+        @include media-breakpoint-up(xl) {
+            font-size: 14px;
+            padding: 25px 50px;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+<nav class="navbar navbar-fixed-top navbar-preload" [ngClass]="{'initial-state': initialState}">
+    <!-- Brand / Logo -->
+  <div class="navbar-container col-xl-8 offset-xl-2">
+    <div class="navbar-brand col col-xs-12 col-md-4">
+      <a class="navbar-brand" [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+         [routerLinkActiveOptions]="{exact:true}" (click)="scrollToTop()">
+        <div class="navbar-brand-logo">{{config.APP_TITLE}}</div>
+      </a>
+    </div>
+
+    <!-- Navigation links. Collapsed on mobile, always visible an bigger screens -->
+    <div class="nav-items col col-md-8" [ngClass]="{'mobile-opened': menuOpened}">
+      <ul class="nav navbar-nav">
+        <li><a (click)="scrollToTop()" class="hidden-md-up" >Home</a></li>
+        <li><a (click)="handleClick($event, '#map')">Karte</a></li>
+        <li><a (click)="handleClick($event, '#list')">Tabelle</a></li>
+        <li><a (click)="handleClick($event, '#shop')">Shop</a></li>
+        <li class="hidden-md-up"><a (click)="handleClick($event, '#contact')">Kontakt</a></li>
+      </ul>
+
+      <div class="nav-footer hidden-md-up">
+        <div class="sm-icons">
+          <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="sm-icon" width="1536" height="1536" viewBox="0 0 1536 1536" version="1.1"><path d="M1248 0Q1367 0 1451.5 84.5 1536 169 1536 288l0 960q0 119-84.5 203.5Q1367 1536 1248 1536l-188 0 0-595 199 0 30-232-229 0 0-148q0-56 23.5-84 23.5-28 91.5-28l122-1 0-207q-63-9-178-9-136 0-217.5 80Q820 392 820 538l0 171-200 0 0 232 200 0 0 595-532 0Q169 1536 84.5 1451.5 0 1367 0 1248L0 288Q0 169 84.5 84.5 169 0 288 0l960 0z"/></svg>
+
+
+          <svg class="sm-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" width="800" height="800" viewBox="0 0 800 800" enable-background="new 0 0 800 800" xml:space="preserve"><defs><rect width="800" height="800"/></defs><clipPath><use overflow="visible"/></clipPath><path clip-path="url(#SVGID_2_)" d="M400 72.1c106.8 0 119.5 0.4 161.6 2.3 39 1.8 60.2 8.3 74.3 13.8 18.7 7.3 32 15.9 46 29.9 14 14 22.7 27.3 29.9 46 5.5 14.1 12 35.3 13.8 74.3 1.9 42.2 2.3 54.8 2.3 161.6s-0.4 119.5-2.3 161.6c-1.8 39-8.3 60.2-13.8 74.3 -7.3 18.7-15.9 32-29.9 46 -14 14-27.3 22.7-46 29.9 -14.1 5.5-35.3 12-74.3 13.8 -42.2 1.9-54.8 2.3-161.6 2.3 -106.8 0-119.5-0.4-161.6-2.3 -39-1.8-60.2-8.3-74.3-13.8 -18.7-7.3-32-15.9-46-29.9 -14-14-22.7-27.3-29.9-46 -5.5-14.1-12-35.3-13.8-74.3 -1.9-42.2-2.3-54.8-2.3-161.6s0.4-119.5 2.3-161.6c1.8-39 8.3-60.2 13.8-74.3 7.3-18.7 15.9-32 29.9-46 14-14 27.3-22.7 46-29.9 14.1-5.5 35.3-12 74.3-13.8C280.5 72.5 293.2 72.1 400 72.1M400 0c-108.6 0-122.3 0.5-164.9 2.4 -42.6 1.9-71.7 8.7-97.1 18.6C111.7 31.2 89.4 44.9 67.1 67.1 44.9 89.4 31.2 111.7 21 138 11.1 163.4 4.4 192.5 2.4 235.1c-1.9 42.7-2.4 56.3-2.4 164.9 0 108.6 0.5 122.3 2.4 164.9 1.9 42.6 8.7 71.7 18.6 97.1 10.2 26.3 23.9 48.6 46.1 70.9 22.2 22.2 44.5 35.9 70.8 46.1 25.4 9.9 54.5 16.6 97.1 18.6 42.7 1.9 56.3 2.4 164.9 2.4 108.6 0 122.3-0.5 164.9-2.4 42.6-1.9 71.7-8.7 97.1-18.6 26.3-10.2 48.6-23.9 70.9-46.1 22.2-22.2 35.9-44.5 46.1-70.8 9.9-25.4 16.7-54.5 18.6-97.1 1.9-42.7 2.4-56.3 2.4-164.9 0-108.6-0.5-122.3-2.4-164.9 -1.9-42.6-8.7-71.7-18.6-97.1 -10.2-26.3-23.9-48.6-46.1-70.8 -22.2-22.2-44.5-35.9-70.9-46.1 -25.4-9.9-54.5-16.7-97.1-18.6C522.3 0.5 508.6 0 400 0M400 194.6c-113.4 0-205.4 92-205.4 205.4S286.6 605.4 400 605.4c113.4 0 205.4-92 205.4-205.4S513.4 194.6 400 194.6M400 533.3c-73.6 0-133.3-59.7-133.3-133.3s59.7-133.3 133.3-133.3 133.3 59.7 133.3 133.3S473.6 533.3 400 533.3M661.5 186.5c0 26.5-21.5 48-48 48 -26.5 0-48-21.5-48-48 0-26.5 21.5-48 48-48C640 138.5 661.5 160 661.5 186.5"/></svg>
+
+          <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" class="sm-icon" width="1536" height="1536" viewBox="0 0 1536 1536" version="1.1"><path d="M1248 0Q1367 0 1451.5 84.5 1536 169 1536 288l0 960q0 119-84.5 203.5Q1367 1536 1248 1536l-725 0q85-122 108-210 9-34 53-209 21 39 73.5 67 52.5 28 112.5 28 181 0 295.5-147.5Q1280 917 1280 691 1280 607 1245 528.5 1210 450 1148.5 389.5 1087 329 996 292.5 905 256 799 256 695 256 604.5 284.5 514 313 451.5 361 389 409 344 470.5 299 532 277.5 598.5 256 665 256 731q0 102 39.5 180 39.5 78 116.5 110 13 5 23.5 0 10.5-5 14.5-19 10-44 15-61 6-23-11-42Q404 837 404 749 404 599 507.5 492.5 611 386 778 386q149 0 232.5 81 83.5 81 83.5 210 0 168-67.5 286-67.5 118-173.5 118-60 0-97-43.5Q719 994 733 934 741 900 759.5 841.5 778 783 789 739.5 800 696 800 665 800 616 773.5 583.5 747 551 698 551 637 551 594.5 607.5 552 664 552 747q0 72 24 121l-98 414q-24 100-7 254l-183 0Q169 1536 84.5 1451.5 0 1367 0 1248L0 288Q0 169 84.5 84.5 169 0 288 0l960 0z"/></svg>
+        </div>
+
+        <div class="copyright hidden-md-up">
+          <strong>Gisela</strong> &copy;2017
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile navigation buttons, e.g. for opening collapsed menu -->
+    <div class="navbar-buttons visible-xs hidden-md-up">
+      <button class="hamburger hamburger--collapse navbar-toggler" type="button"
+              (click)="menuOpened = !menuOpened"
+              [ngClass]="{'is-active': menuOpened ? true : false}"
+              data-toggle="collapse"
+              data-target="#exCollapsingNavbar"
+              aria-controls="exCollapsingNavbar"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+      </button>
+    </div>
+  </div>
+</nav>
