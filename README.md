@@ -1,6 +1,6 @@
-# Cande.ly Website
+# Gisela Website
 
-This is the web frontend of [Cande.ly](https://www.cande.ly), based on [angular-seed](https://github.com/mgechev/angular-seed).
+This is the web frontend of [gisela.rocks](https://www.gisela.rocks), based on [angular-seed](https://github.com/mgechev/angular-seed).
 
 ## Requirements
 
