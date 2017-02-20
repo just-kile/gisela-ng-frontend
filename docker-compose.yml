@@ -1,0 +1,63 @@
+## Docker Compose configuration files
+##
+## You may use the services test and www to run tests or run the application webserver. See README for more information.
+##
+
+version: '2'
+services:
+
+  project:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.build
+    volumes:
+      - /opt/app
+
+  ##
+  ## This service will run unit and protractor/e2e tests
+  ##
+#  test:
+#    image: markadams/chromium-xvfb
+#    command: /opt/app/.docker/run-tests
+#    environment:
+#      - BASEURL=http://www
+#      - CHROME_BIN=chromium
+#      - TRAVIS=true
+#    links:
+#      - www
+#    volumes_from:
+#      - project
+
+#  test_dev:
+#    image: node:wheezy
+#    command: /opt/app/.docker/run-tests-dev
+#    privileged: true
+#    volumes:
+#      - .:/opt/app
+#      - /opt/app/node_modules
+
+
+  ##
+  ## Webserver to serve production build. This is ment to be run in dev context only - *not* from CI.
+  ## Access via http://localhost:5555
+  ##
+  www:
+    image: nginx
+    command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /opt/app/.docker/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    ports:
+      - '5555:80'
+    volumes_from:
+      - project
+
+  dist:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.prod
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    ports:
+      - '5555:80'

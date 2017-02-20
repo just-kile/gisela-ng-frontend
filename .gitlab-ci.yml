@@ -1,0 +1,51 @@
+image: docker:git
+
+services:
+- docker:dind
+
+# When using dind, it's wise to use the overlayfs driver for
+# improved performance.
+variables:
+  DOCKER_DRIVER: overlay
+  DOMAIN: candely.ofigo.de
+  RANCHER_URL: https://rancher.ofigo.de
+
+before_script:
+  - wget https://github.com/git-lfs/git-lfs/releases/download/v1.5.2/git-lfs-linux-amd64-1.5.2.tar.gz
+  - tar xzvf git-lfs-linux-amd64-1.5.2.tar.gz
+  - cp git-lfs-1.5.2/git-lfs /bin
+  - git lfs install
+  - apk add --no-cache py2-pip
+  - pip install docker-compose
+  - wget 'https://releases.rancher.com/compose/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz'
+  - tar xzf rancher-compose-linux-amd64-v0.8.6.tar.gz
+  - cp rancher-compose-v0.8.6/rancher-compose /usr/bin
+  - rm -rf rancher-compose*
+  - export TAG=$(echo $CI_BUILD_REF_NAME | sed 's#[^A-Za-z0-9]#-#g')
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.intranet.ofigo.de
+  - git lfs pull
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+# Tests are disabled for now…
+#  - docker-compose build test
+  - docker network create frontend_default
+  - docker-compose create project
+  - docker cp frontend_project_1:/opt/app/dist .
+  - docker build -f .docker/Dockerfile.prod -t registry.intranet.ofigo.de/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$TAG .
+  - docker push registry.intranet.ofigo.de/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$TAG
+
+deploy:
+  stage: deploy
+  script:
+    - git clone --depth 1 "https://gitlab-ci-token:$CI_BUILD_TOKEN@git.intranet.ofigo.de/infrastructure/rancher-catalog.git" catalog
+    - mkdir candely && cp catalog/templates/candely/0/docker-compose.yml candely/
+    - cd candely && cat docker-compose.yml
+    - rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY up -u -c -p -d frontend frontend
+  only:
+    - master

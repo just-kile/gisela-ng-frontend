@@ -1,0 +1,12 @@
+FROM registry.intranet.ofigo.de/candely/builder:latest
+MAINTAINER Thomas Vollstädt <vollstaedt@ofigo.de>
+
+WORKDIR /opt/app
+
+# App
+COPY . /opt/app
+
+RUN npm install && \
+    ./node_modules/.bin/gulp build.bundle.rxjs && \
+    npm run build.e2e && \
+    npm run build.prod

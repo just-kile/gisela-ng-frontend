@@ -1,0 +1,267 @@
+@import "variables";
+@import "mixins";
+@import "bootstrap/colors";
+
+:host {
+    // Styles below apply to phone screen size (default)
+
+    @mixin logoAnimation {
+        transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
+    }
+
+    border-color: #e1e1e1;
+    border-style: solid;
+    border-width: 0;
+    display: block;
+    margin-bottom: 50px;
+
+    nav.navbar {
+        padding: 0;
+        background-color: #fff;
+
+        a {
+            outline: none;
+        }
+
+        .navbar-container {
+            height: 50px;
+            padding: 6px 20px;
+
+            display: flex;
+            align-items: center;
+
+            // Disable padding on columns
+            > div.col {
+                padding: 0;
+            }
+
+            // Logo
+            div.navbar-brand {
+                margin-right: 0;
+                a {
+                    padding: 0;
+                    line-height: 0;
+                    font-size: 0;
+                    color: transparent;
+
+                    .navbar-brand-logo {
+                        background-image: url(../assets/img/brand.png);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        width: 102px;
+                        height: 40px;
+                    }
+                }
+            }
+
+            // Navigation items and social icons on mobile
+            div.nav-items {
+                // Menu is invisible by default
+                display: none;
+
+                // Link styling
+                a, a:link, a:focus, a:hover, a:active {
+                    color: #fff;
+                    font-size: 18px;
+                    letter-spacing: 0.2em;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &.router-link-active {
+                        color: #106cc8;
+                    }
+                }
+
+                // Mobile menu
+                @include media-breakpoint-down(sm) {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: fixed;
+                    top: 0;
+                    left: 100%; // Initially hide menu on right side
+                    width: 100%;
+                    height: 100%;
+                    background: $basalt;
+
+                    // Menu animation
+                    transition: left 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+
+                    // Menu was opened
+                    &.mobile-opened {
+                        left: 0; // Slide from right
+                    }
+
+                    // Navigation links
+                    ul.navbar-nav {
+                        // More space to top
+                        padding-top: 70px;
+
+                        /**
+                         * Element positioning
+                         */
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        flex-grow: 1;
+                        justify-content: center;
+
+                        li {
+                            padding: 11px 0;
+                            a {
+                                color: #fff;
+                                font-size: 18px;
+                                letter-spacing: 0.1em;
+                            }
+                        }
+                    }
+
+                    .nav-footer {
+                        color: #fff;
+
+                        .copyright {
+                            padding: 15px 0;
+                            letter-spacing: normal;
+                        }
+
+                        a, .headline, .copyright {
+                            text-align: center;
+                            font-size: 10px;
+                        }
+
+                        // Social media icons
+                        .sm-icons {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            justify-content: space-around;
+                            margin: 30px 10px;
+
+                            // A single icon
+                            .sm-icon {
+                                display: inline-block;
+                                width: 40px;
+                                height: 40px;
+                                fill: #fff;
+
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Buttons for mobile navigation
+            div.navbar-buttons {
+
+                z-index: 9999; // Woraround to make close button clickable on FF
+
+                button.hamburger {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    padding: 2px 1px 0 0;
+                    color: white;
+                    background-color: transparent;
+                    transition: background-color 1s;
+
+                    .hamburger-box {
+                        width: 25px;
+
+                        .hamburger-inner,.hamburger-inner:before,.hamburger-inner:after {
+                            width: 25px;
+                            height: 2px;
+                            background-color: $basalt;
+                        }
+                    }
+
+                    &.is-active {
+                        background-color: lightsalmon;
+                    }
+
+                }
+            }
+        }
+    }
+
+    // Styles below apply to tablet size
+    @include media-breakpoint-up(md) {
+        margin-bottom: 100px;
+
+        nav.navbar {
+
+            // When scrolled down (small navbar)
+            .navbar-container {
+
+                height: 70px;
+                text-align: right;
+                transition: height 0.3s ease-in-out;
+
+                div.navbar-brand {
+                    a {
+                        .navbar-brand-logo {
+                            background-image: url(../assets/img/brand.png);
+                            background-size: contain;
+                            @include logoAnimation;
+                        }
+                    }
+                }
+
+                // Navigation items
+                div.nav-items {
+                    // Items are visible on bigger screens by default
+                    display: block;
+
+                    // Link styling
+                    a, a:link, a:focus, a:hover, a:active {
+                        color: $basalt;
+                        font-size: 16px;
+                        cursor: pointer;
+                    }
+
+                    ul.navbar-nav {
+                        display: block;
+
+                        li {
+                            display: inline;
+                            text-transform: uppercase;
+                            margin-right: 30px;
+
+                            &.no-margin-right {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            // When scrolled up (large navbar)
+            &.initial-state {
+                .navbar-container {
+
+                    height: 100px;
+                    div.navbar-brand {
+                        a {
+                            .navbar-brand-logo {
+                                width: 150px;
+                                height: 60px;
+                                background-image: url(../assets/img/brand.png);
+                                background-size: contain;
+                                @include logoAnimation;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Styles below apply to desktop size and up
+    @include media-breakpoint-up(lg) {
+        nav.navbar .navbar-container ul.navbar-nav li {
+            margin-right: 40px;
+        }
+    }
+}

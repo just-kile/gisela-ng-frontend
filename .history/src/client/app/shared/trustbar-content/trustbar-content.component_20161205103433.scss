@@ -1,0 +1,157 @@
+
+// This file is imported before the main.scss, so we need to reference
+// the required bootstrap files manually,
+// see https://github.com/mgechev/angular-seed/wiki/Working-with-SASS
+@import "variables";
+@import "mixins";
+
+// The pseudo-pseude class ':host' is given to the component root-element
+// by angular
+:host {
+
+    $border-color: $gray-lighter;
+
+    // The main flex-box layout for the mobile version of the trustbar
+    .trustbar-layout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    // The flex items in the trustbar layout
+    .trustbar-layout > div {
+        display: inline-block;
+        flex-basis: 50%;
+        text-align: center;
+        flex-shrink: 0;
+        // Trickery to get perfect squares: We know that on mobile
+        // the boxes are always 50% of the view width (50vw),
+        // so we can fix their height to 50vw
+        // This breaks on larger devices, but for mobile phones its
+        // fine
+        min-height: 50vw;
+
+        // See comment in .delivery why this is necesary for IE 10+
+        position: relative;
+        &::after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            content: " ";
+            display: inline-block;
+        }
+    }
+
+    // The headline takes up the full line
+    strong {
+        display: block;
+    }
+
+    // Margin between the image and the text. Will be subtracted
+    // from the space the image uses
+    $img-margin: 10px;
+
+    .img {
+
+        background-repeat: no-repeat;
+
+        // Pin the image to the bottom of the box so it grows "up"
+        background-position: 50% 100%;
+
+        // The actual image size
+        background-size: 10vmin 10vmin;
+
+        // 25vw == 50% height of the box belongs to the image,
+        // since the box is 50vw high
+        height: calc(25vw - #{$img-margin});
+        margin-bottom: $img-margin;
+        background-repeat: no-repeat;
+    }
+
+    // Image specific settings
+    .delivery {
+        > .img {
+            background-image: url('../assets/img/Candely_Lieferung.svg');
+        }
+
+        // The following does not work in IE 10+ because of Flex-bug
+        // #7: https://github.com/philipwalton/flexbugs#7-flex-basis-doesnt-account-for-box-sizingborder-box
+        // box-sizing: border-box;
+        // border-right: 1px solid $border-color;
+        // border-bottom: 1px solid $border-color;
+        // The Bug #7 leads to IE always using content-box as box sizing property
+        // when using flex-basis, breaking our flex-basis 50% (making it effectively 51% or so).
+        // So the solution is to remove the border from the main element and put it in the
+        // after-element:
+        &::after {
+            border-right: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+
+    .fast {
+        > .img {
+            background-image: url('../assets/img/Candely_Schnell.svg');
+        }
+
+        // See .delivery why this is necesary in IE 10+
+        &::after {
+            border-bottom: 1px solid $border-color;
+        }
+    }
+
+    .pay {
+        > .img {
+            background-image: url('../assets/img/Candely_Pay.svg');
+        }
+
+        // See .delivery why this is necesary in IE 10+
+        &::after {
+            border-right: 1px solid $border-color;
+        }
+    }
+
+    .safe {
+        > .img {
+            background-image: url('../assets/img/Candely_Sicher.svg');
+        }
+    }
+
+    @include media-breakpoint-up(sm) {
+        .trustbar-layout {
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        .trustbar-layout > div {
+
+            // Remove borders
+            &::after {
+                border: 0;
+            }
+
+            // In tablet and desktop we don't want the squares but a bar
+            flex: 0 0 100%;
+            min-height: 0;
+            padding: 15px;
+
+            // The trustbar sections have some max width in the design
+            // (visibile by the linebreaks)
+            max-width: 250px;
+        }
+
+        .img {
+            height: 40px;
+            background-size: contain;
+            background-position: 50% 50%;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .trustbar-layout > div {
+            padding: 30px;
+        }
+    }
+}

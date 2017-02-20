@@ -1,0 +1,56 @@
+// Note: Only styles that concern the whole page (e.g. body styles) should go here.
+
+// Minimize weired sizing behaviour
+* {
+  box-sizing: border-box;
+}
+
+// Reset default properties
+html,
+body,
+div {
+  border: 0;
+  padding: 0;
+}
+
+// Restrict overflow to vertical scrollbars so we can use
+// 100% viewport width sized elements without subtracting the
+// scrollbar width in desktop mode
+body, html {
+  overflow-x: hidden;
+}
+
+// IE10-Compatibility hack.
+//
+// Swiper uses stacked slides and opacity to get the 'fade' effect. It does not set 'display: none' since that would
+// disable the fade effect. The currently active (visible) slide is the lowermost slide in the stack. To make it
+// possible to click an element on a slide at the end of the stack, swiper uses pointer-events and and opacity: 0.
+// But pointer-events are not supported in IE10 and below, and 'opacity: 0' and click events are also buggy in IE 10.
+// (see http://caniuse.com/#feat=pointer-events). This leads to the effect that while the correct slide is visible,
+// clicks always target the last slide in the slider (which is the topmost in the stack).
+// It does not seem possible to fix this without rewriting most of the transition logic and quite possibly introducing
+// new bugs for all other browser. So since the IE10 has a tiny usage margin of about 0.4%, and the effect is generally
+// quite subtle, we just remove it for IE10 users, which we can do by just not displaying the non active part of the stack.
+//
+// Note (1) that this should also apply to other (strange) browsers that do not support css pointer events
+// Note (2) that this has to go into a global css file since angulars componens should (and can not) depend on body styles
+// (and ViewEncapsulation.None has other side effects)
+// Note (3) that you can enable this for your slides by adding the no-pointerevents-fade class to the swiper container
+// (the *-wrappers parent)
+// Note (4) that this does NOT work on IE11 with IE10 compatibility mode: The popup will still be broken since this
+// combination does not seem to be supported by modernizr (modernizr reports support while the property is not supported)
+html.no-csspointerevents {
+  .no-pointerevents-fade .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-duplicate-active) {
+    display: none !important;
+  }
+}
+
+h3 {
+  font-size: 24px;
+}
+
+* {
+  // Default letter spacing for all elements - relative to font size
+  letter-spacing: 0.1em;
+}
+

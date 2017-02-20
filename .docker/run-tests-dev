@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+#wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+#sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#apt-get update
+#apt-get install -y default-jre-headless xvfb firefox-esr google-chrome-stable
+
+
+cd /opt/app &&
+npm install &&
+./node_modules/.bin/gulp build.bundle.rxjs &&
+npm run webdriver-update &&
+npm run webdriver-start &&
+npm run test &&
+npm run e2e.ci

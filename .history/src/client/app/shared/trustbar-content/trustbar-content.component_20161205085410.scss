@@ -1,0 +1,114 @@
+
+// This file is imported before the main.scss, so we need to reference
+// the required bootstrap files manually,
+// see https://github.com/mgechev/angular-seed/wiki/Working-with-SASS
+@import "variables";
+@import "mixins";
+
+// The pseudo-pseude class ':host' is given to the component root-element
+// by angular
+:host {
+
+    $border-color: $gray-lighter;
+
+    // The main flex-box layout for the mobile version of the trustbar
+    .trustbar-layout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    // The flex items in the trustbar layout
+    .trustbar-layout > div {
+        display: inline-block;
+        flex-basis: 50%;
+        text-align: center;
+        flex-shrink: 0;
+        // Trickery to get perfect squares: We know that on mobile
+        // the boxes are always 50% of the view width (50vw),
+        // so we can fix their height to 50vw
+        // This breaks on larger devices, but for mobile phones its
+        // fine
+        min-height: 50vw;
+    }
+
+    // The headline takes up the full line
+    strong {
+        display: block;
+    }
+
+    // Margin between the image and the text. Will be subtracted
+    // from the space the image uses
+    $img-margin: 10px;
+
+    .img {
+
+        background-repeat: no-repeat;
+
+        // Pin the image to the bottom of the box so it grows "up"
+        background-position: 50% 100%;
+
+        // The actual image size
+        background-size: 10vmin 10vmin;
+
+        // 25vw == 50% height of the box belongs to the image,
+        // since the box is 50vw high
+        height: calc(25vw - #{$img-margin});
+        margin-bottom: $img-margin;
+        background-repeat: no-repeat;
+    }
+
+    // Image specific settings
+    .delivery {
+        border-right: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+
+        .img {
+            background-image: url('../assets/img/Candely_Lieferung.svg');
+        }
+    }
+
+    .fast {
+        border-bottom: 1px solid $border-color;
+        > .img {
+            background-image: url('../assets/img/Candely_Schnell.svg');
+        }
+    }
+
+    .pay {
+        border-right: 1px solid $border-color;
+        > .img {
+            background-image: url('../assets/img/Candely_Pay.svg');
+        }
+    }
+
+    .safe {
+        > .img {
+            background-image: url('../assets/img/Candely_Sicher.svg');
+        }
+    }
+
+    @include media-breakpoint-up(sm) {
+        .trustbar-layout {
+            flex-wrap: nowrap;
+        }
+
+        .trustbar-layout > div {
+            border: 0;
+            // In tablet and desktop we don't want the squares but a bar
+            flex: 1 0 0;
+            min-height: unset;
+            padding: 15px;
+
+            // The trustbar sections have some max width in the design
+            // (visibile by the linebreaks)
+            max-width: 250px;
+        }
+
+        .img {
+            height: 40px;
+            background-size: contain;
+            background-position: 50% 50%;
+        }
+    }
+}

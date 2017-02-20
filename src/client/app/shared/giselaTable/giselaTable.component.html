@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>When</th>
+      <th>Where</th>
+      <th>Distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let coordinate of coordinates">
+      <td>{{ coordinate.start | date: 'yyyy-MM-dd' }} - {{ coordinate.end | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ coordinate.location.name }}</td>
+      <td>{{ coordinate.location.distanceFromHome }} km</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td>TOTAL TRAVELED (assuming round-trips):</td>
+      <td>{{ totalDistanceTraveled }} km</td>
+    </tr>
+  </tfoot>
+</table>

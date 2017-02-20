@@ -1,0 +1,2 @@
+#!/bin/bash
+xvfb-run --server-args="-ac -screen 0 1280x720x16 -nolisten tcp" /usr/bin/chromium --no-sandbox $@

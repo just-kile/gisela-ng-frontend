@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd /opt/app
+Xvfb :1 -screen 0 1280x1024x24 &
+export DISPLAY=:1
+
+# run unit tests
+echo "Running unit tests…"
+npm test || exit 1
+
+# run protractor tests
+mkdir -p target
+
+echo "Running e2e tests…"
+if [ -n "$BASEURL" ]; then
+	protractor --baseUrl=$BASEURL $@ || exit 1
+else
+	protractor $@ || exit 1
+fi
