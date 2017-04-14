@@ -97,7 +97,60 @@ export class ProjectConfig extends SeedConfig {
                     main: 'index.js',
                     defaultExtension: 'js'
                 }
+            },
+            {
+                // Name under which the dependecy will be known, so we can do
+                //import {} from [NAME]
+                name: 'angular2-datatable',
+                // Path to the npm js file
+                path: `${this.NPM_BASE}/angular2-datatable/index.js`,
+                // The package meta is not required by the ExtendPackages interface but
+                // you will need to add this so the build process bundles the js file
+                packageMeta: {
+                    main: 'index.js',
+                    defaultExtension: 'js'
+                }
+            },
+            {
+                // Name under which the dependecy will be known, so we can do
+                //import {} from [NAME]
+                name: 'lodash',
+                // Path to the npm js file
+                path: `${this.NPM_BASE}/lodash/index.js`,
+                // The package meta is not required by the ExtendPackages interface but
+                // you will need to add this so the build process bundles the js file
+                packageMeta: {
+                    main: 'index.js',
+                    defaultExtension: 'js'
+                }
+            },
+            {
+                // Name under which the dependecy will be known, so we can do
+                //import {} from [NAME]
+                name: 'moment',
+                // Path to the npm js file
+                path: `${this.NPM_BASE}/moment/moment.js`,
+                // The package meta is not required by the ExtendPackages interface but
+                // you will need to add this so the build process bundles the js file
+                packageMeta: {
+                    main: 'moment.js',
+                    defaultExtension: 'js'
+                }
+            },
+            {
+                // Name under which the dependecy will be known, so we can do
+                //import {} from [NAME]
+                name: 'angular2-moment',
+                // Path to the npm js file
+                path: `${this.NPM_BASE}/angular2-moment/index.d.ts`,
+                // The package meta is not required by the ExtendPackages interface but
+                // you will need to add this so the build process bundles the js file
+                packageMeta: {
+                    main: 'index.js',
+                    defaultExtension: 'ts'
+                }
             }
+
         ];
 
         this.addPackagesBundles(additionalPackages);

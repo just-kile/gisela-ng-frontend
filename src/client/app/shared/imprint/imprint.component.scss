@@ -1,0 +1,27 @@
+:host {
+}
+
+.row-center {
+    text-align: center;
+
+    a {
+        color: lightgrey;
+        link {
+            color: lightgrey;
+        }
+        .hoover {
+            color: lightgrey;
+        }
+        .visited {
+            color: lightgrey;
+        }
+    }
+
+    .row-divider {
+        margin-bottom: 10px;
+    }
+}
+
+.row {
+    margin: 30px 0;
+}

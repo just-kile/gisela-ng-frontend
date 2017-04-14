@@ -1,29 +1,34 @@
 <div class="container">
     <div class="row justify-content-md-center">
-
-        <table class="gisela-table">
+        <h3>Meine Reiseliste</h3>
+        <table class="gisela-table" [mfData]="coordinates" #mf="mfDataTable" [mfRowsOnPage]="20">
             <thead>
             <tr>
-                <th>When</th>
-                <th>Where</th>
-                <th class="td-right">Distance</th>
+                <th class="hidden-sm-down"><mfDefaultSorter by="start">Reisestart</mfDefaultSorter></th>
+                <th class="hidden-sm-down"><mfDefaultSorter by="end">Reiseende</mfDefaultSorter></th>
+                <th class="hidden-md-up td-slim"><mfDefaultSorter by="start">Zeitraum</mfDefaultSorter></th>
+                <th><mfDefaultSorter by="location.name">Reiseziel</mfDefaultSorter></th>
+                <th class="td-right"><mfDefaultSorter by="location.distanceFromHome">Entfernung</mfDefaultSorter></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let coordinate of coordinates">
-                <td>{{ coordinate.start | date: 'yyyy-MM-dd' }} - {{ coordinate.end | date: 'yyyy-MM-dd' }}</td>
+            <tr *ngFor="let coordinate of mf.data">
+                <td class="hidden-sm-down">{{ coordinate.start | date: 'yyyy-MM-dd' }}</td>
+                <td class="hidden-sm-down">{{ coordinate.end | date: 'yyyy-MM-dd' }}</td>
+                <td class="hidden-md-up td-slim">{{ coordinate.start | date: 'yyyy-MM-dd' |  amDateFormat:'YYYY/MM' }}</td>
                 <td>{{ coordinate.location.name }}</td>
                 <td class="td-right">{{ coordinate.location.distanceFromHome }} km</td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <td>TOTAL TRAVELED (assuming round-trips):</td>
-                <td></td>
-                <td class="td-right">{{ totalDistanceTraveled }} km</td>
+                <td colspan="4" class="td-center">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
             </tr>
             </tfoot>
         </table>
-
+        <div class="alert alert-success">Insgesamt bin ich <strong>{{ totalDistanceTraveled }} km</strong> gereist.</div>
     </div>
 </div>
+

@@ -1,8 +1,17 @@
 :host {
-    min-height: 300px;
+}
+
+.landing-image {
+    min-height: 400px;
     display: flex;
     background-image: url('../../../assets/img/gisela-bg.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    margin: 20px 0;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
 }

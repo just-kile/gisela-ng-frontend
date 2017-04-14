@@ -9,6 +9,11 @@ import { GiselaTableComponent } from '../shared/giselaTable/giselaTable.componen
 import { SmoothScrollService } from "../shared/smoothscroll/smoothscroll.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingPageComponent } from './../shared/landingpage/landingpage.component'
+import { ImprintComponent } from './../shared/imprint/imprint.component';
+import {DataTableModule} from "angular2-datatable";
+import {MomentModule} from 'angular2-moment';
+
+
 
 
 
@@ -18,17 +23,21 @@ import { LandingPageComponent } from './../shared/landingpage/landingpage.compon
       HomeRoutingModule,
       SharedModule,
       AgmCoreModule,
-      NgbModule],
+      NgbModule,
+      MomentModule,
+      DataTableModule],
   declarations: [
       HomeComponent,
       GMapsComponent,
       GiselaTableComponent,
-      LandingPageComponent],
+      LandingPageComponent,
+      ImprintComponent],
   exports: [
       HomeComponent,
       GMapsComponent,
       GiselaTableComponent,
-      LandingPageComponent],
+      LandingPageComponent,
+      ImprintComponent],
   providers: [
       SmoothScrollService]
 })

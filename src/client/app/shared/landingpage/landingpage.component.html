@@ -1,0 +1,13 @@
+<h1 style="text-align: center">Howdy!</h1>
+<div class="landing-image">
+</div>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div *ngIf="hasCurrentTrip" class="alert alert-success">Ich bin gerade unterwegs und bis zum
+            <strong>{{ hasCurrentTrip.end | date: 'yyyy-MM-dd' |  amDateFormat:'DD.MM.YYYY' }}</strong>
+            in <strong>{{ hasCurrentTrip.location.name }}</strong>!</div>
+        <br/>
+    </div>
+</div>
+
