@@ -4,10 +4,8 @@ import {APP_BASE_HREF} from '@angular/common';
 import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {globalSecrets} from './../assets/secrets/option.prod';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DataTableModule} from "angular2-datatable";
-import {MomentModule} from 'angular2-moment';
+import {DataTableModule} from "angular2-datatable/index";
 
 
 import {HomeModule} from './home/home.module';
@@ -23,9 +21,8 @@ import {AgmCoreModule, MapsAPILoader} from 'angular2-google-maps/core';
         AppRoutingModule,
         HomeModule,
         DataTableModule,
-        MomentModule,
         SharedModule.forRoot(),
-        AgmCoreModule.forRoot({apiKey: globalSecrets.googleMapsApiKey}),
+        AgmCoreModule.forRoot({apiKey: 'AIzaSyBUTf6gA-CM_EY1wqPjt14SQ9YwiLiDHNM'}),
         NgbModule.forRoot()
     ],
     declarations: [AppComponent],

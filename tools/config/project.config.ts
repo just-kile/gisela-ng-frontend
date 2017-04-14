@@ -1,6 +1,6 @@
-import { join } from 'path';
+import {join} from 'path';
 
-import { SeedConfig } from './seed.config';
+import {SeedConfig} from './seed.config';
 import {ExtendPackages} from "./seed.config.interfaces";
 
 /**
@@ -24,8 +24,8 @@ export class ProjectConfig extends SeedConfig {
         // Add `NPM` third-party libraries to be injected/bundled.
         this.NPM_DEPENDENCIES = [
             ...this.NPM_DEPENDENCIES,
-            { src: 'bootstrap/dist/css/bootstrap.css', inject: true },
-            { src: 'hamburgers/dist/hamburgers.css', inject: true }
+            {src: 'bootstrap/dist/css/bootstrap.css', inject: true},
+            {src: 'hamburgers/dist/hamburgers.css', inject: true}
             // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
             // {src: 'lodash/lodash.min.js', inject: 'libs'},
         ];
@@ -98,32 +98,19 @@ export class ProjectConfig extends SeedConfig {
                     defaultExtension: 'js'
                 }
             },
-            {
-                // Name under which the dependecy will be known, so we can do
-                //import {} from [NAME]
-                name: 'angular2-datatable',
-                // Path to the npm js file
-                path: `${this.NPM_BASE}/angular2-datatable/index.js`,
-                // The package meta is not required by the ExtendPackages interface but
-                // you will need to add this so the build process bundles the js file
-                packageMeta: {
-                    main: 'index.js',
-                    defaultExtension: 'js'
-                }
-            },
-            {
-                // Name under which the dependecy will be known, so we can do
-                //import {} from [NAME]
-                name: 'lodash',
-                // Path to the npm js file
-                path: `${this.NPM_BASE}/lodash/index.js`,
-                // The package meta is not required by the ExtendPackages interface but
-                // you will need to add this so the build process bundles the js file
-                packageMeta: {
-                    main: 'index.js',
-                    defaultExtension: 'js'
-                }
-            },
+            // {
+            //     // Name under which the dependecy will be known, so we can do
+            //     //import {} from [NAME]
+            //     name: 'lodash',
+            //     // Path to the npm js file
+            //     path: `${this.NPM_BASE}/lodash/index.js`,
+            //     // The package meta is not required by the ExtendPackages interface but
+            //     // you will need to add this so the build process bundles the js file
+            //     packageMeta: {
+            //         main: 'index.js',
+            //         defaultExtension: 'js'
+            //     }
+            // },
             {
                 // Name under which the dependecy will be known, so we can do
                 //import {} from [NAME]
@@ -136,24 +123,14 @@ export class ProjectConfig extends SeedConfig {
                     main: 'moment.js',
                     defaultExtension: 'js'
                 }
-            },
-            {
-                // Name under which the dependecy will be known, so we can do
-                //import {} from [NAME]
-                name: 'angular2-moment',
-                // Path to the npm js file
-                path: `${this.NPM_BASE}/angular2-moment/index.d.ts`,
-                // The package meta is not required by the ExtendPackages interface but
-                // you will need to add this so the build process bundles the js file
-                packageMeta: {
-                    main: 'index.js',
-                    defaultExtension: 'ts'
-                }
             }
 
         ];
 
         this.addPackagesBundles(additionalPackages);
+
+        this.SYSTEM_CONFIG.paths['lodash'] = `${this.APP_BASE}node_modules/lodash/index`;
+        this.SYSTEM_BUILDER_CONFIG.paths['lodash'] = `node_modules/lodash/index.js`;
         // Add packages (e.g. ng2-translate)
         // let additionalPackages: ExtendPackages[] = [{
         //   name: 'ng2-translate',
@@ -172,6 +149,6 @@ export class ProjectConfig extends SeedConfig {
         // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
 
         // "ghostMode: false" fixes smooth scrolling behaviour on different screen-sizes
-        this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { notify: false, ghostMode: false});
+        this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], {notify: false, ghostMode: false});
     }
 }

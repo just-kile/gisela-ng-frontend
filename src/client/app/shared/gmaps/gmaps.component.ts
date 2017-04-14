@@ -42,7 +42,7 @@ export class GMapsComponent {
     // TODO: see https://github.com/SebastianM/angular2-google-maps/pull/868 for further information
     // "latitude": 51.678418,
     // "longitude": 7.809007,
-    "icon": 'http://img4host.net/upload/1403225158a269fb82d30.png'
+    "icon": 'https://www.gisela.rocks/assets/gisela_ico.png'
   };
 }
 
