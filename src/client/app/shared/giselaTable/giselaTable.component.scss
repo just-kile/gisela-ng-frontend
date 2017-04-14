@@ -2,10 +2,20 @@
 }
 
 
-/* just fooling around, table component should implement an already styled one */
-thead tr th {
-  border-bottom: 1px solid #ccc;
-}
-tfoot tr td {
-  border-top: 1px solid #ccc;
+.gisela-table {
+    /* adjust width to container */
+    width: 100%;
+
+    /* just fooling around, table component should implement an already styled one */
+    thead tr th {
+        border-bottom: 1px solid #ccc;
+    }
+    tfoot tr td {
+        border-top: 1px solid #ccc;
+    }
+
+    .td-right {
+        text-align: right;
+    }
+
 }

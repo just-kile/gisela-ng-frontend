@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ApiService {
 
-  devUrl = 'http://localhost:3000/positions';
+  devUrl = 'https://gisela.notsecu.re/positions';
 
   constructor(private http: Http) {
   }
