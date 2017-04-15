@@ -4,9 +4,9 @@
         <table class="gisela-table" [mfData]="coordinates" #mf="mfDataTable" [mfRowsOnPage]="20">
             <thead>
             <tr>
-                <th class="hidden-sm-down"><mfDefaultSorter by="start">Reisestart</mfDefaultSorter></th>
+                <th class="hidden-sm-down"><datatable-sorter initial="desc" by="start">Reisestart</datatable-sorter></th>
                 <th class="hidden-sm-down"><mfDefaultSorter by="end">Reiseende</mfDefaultSorter></th>
-                <th class="hidden-md-up td-slim"><mfDefaultSorter by="start">Zeitraum</mfDefaultSorter></th>
+                <th class="hidden-md-up td-slim"><datatable-sorter initial="desc" by="start">Zeitraum</datatable-sorter></th>
                 <th><mfDefaultSorter by="location.name">Reiseziel</mfDefaultSorter></th>
                 <th class="td-right"><mfDefaultSorter by="location.distanceFromHome">Entfernung</mfDefaultSorter></th>
             </tr>

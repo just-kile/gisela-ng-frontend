@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {DataService} from '../api/data.service';
 import {GiselaDataModel} from '../api/datamodels.model';
 
-
 /**
  * This class represents the lazy loaded GiselaTableComponent.
  */
