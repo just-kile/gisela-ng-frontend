@@ -13,11 +13,11 @@
             </thead>
             <tbody>
             <tr *ngFor="let coordinate of mf.data">
-                <td class="hidden-sm-down">{{ coordinate.start | date: 'yyyy-MM-dd' }}</td>
-                <td class="hidden-sm-down">{{ coordinate.end | date: 'yyyy-MM-dd' }}</td>
-                <td class="hidden-md-up td-slim">{{ coordinate.start | date: 'yyyy-MM-dd' |  amDateFormat:'YYYY/MM' }}</td>
-                <td>{{ coordinate.location.name }}</td>
-                <td class="td-right">{{ coordinate.location.distanceFromHome }} km</td>
+                <td class="hidden-sm-down" [ngClass]="isAfterNow(coordinate.start)">{{ coordinate.start | date: 'yyyy-MM-dd' }}</td>
+                <td class="hidden-sm-down" [ngClass]="isAfterNow(coordinate.start)">{{ coordinate.end | date: 'yyyy-MM-dd' }}</td>
+                <td class="hidden-md-up td-slim" [ngClass]="isAfterNow(coordinate.start)">{{ coordinate.start | date: 'yyyy-MM-dd' |  amDateFormat:'YYYY/MM' }}</td>
+                <td [ngClass]="isAfterNow(coordinate.start)">{{ coordinate.location.name }}</td>
+                <td class="td-right" [ngClass]="isAfterNow(coordinate.start)">{{ coordinate.location.distanceFromHome }} km</td>
             </tr>
             </tbody>
             <tfoot>

@@ -12,6 +12,11 @@
 
     width: 100%;
 
+    .italic {
+        color: lightgrey;
+        font-style: italic;
+    }
+
     td {
         font-size: 14px;
         max-width: 150px;

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {DataService} from '../api/data.service';
 import {GiselaDataModel} from '../api/datamodels.model';
+import {now} from "moment";
+import moment = require("moment");
 
 /**
  * This class represents the lazy loaded GiselaTableComponent.
@@ -26,6 +28,14 @@ export class GiselaTableComponent {
 
         })
     }
+
+    public isAfterNow = function (date:any) {
+        if (moment(date).isAfter(moment.now())) {
+            return 'italic';
+        } else {
+            return ''
+        }
+    };
 
     /**
      * array with all the locations where gisela has been
