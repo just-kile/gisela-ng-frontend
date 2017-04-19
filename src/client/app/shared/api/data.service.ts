@@ -47,8 +47,13 @@ export class DataService {
     getTotalDistanceTraveled(positions: GiselaDataModel[]) {
         let totalDistance: number = 0;
         positions.forEach((entry: GiselaDataModel) => {
-            // assume, that she came back the same way --> multiply by 2
-            totalDistance += 2 * (entry.location.distanceFromHome);
+            if (moment(entry.start).isBefore(moment.now()) && moment(entry.end).isBefore(moment.now())) {
+                // assume, that she came back the same way --> multiply by 2
+                totalDistance += 2 * (entry.location.distanceFromHome);
+            } else if (moment(entry.start).isBefore(moment.now()) && moment(entry.end).isAfter(moment.now())) {
+                // gisela is currently traveling, assume, that she made it half way --> multiply by 1 (one-way)
+                totalDistance += 1 * (entry.location.distanceFromHome);
+            }
         });
         return this.numberWithThousandDevider(totalDistance);
     }
@@ -63,7 +68,7 @@ export class DataService {
         return result;
     }
 
-    numberWithThousandDevider(value:number) {
+    numberWithThousandDevider(value: number) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 }
