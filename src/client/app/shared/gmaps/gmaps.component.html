@@ -2,11 +2,23 @@
     <div class="row justify-content-md-center">
         <h3>Meine Weltkarte</h3>
         <sebm-google-map [zoom]="gmapsSettings.zoom">
-          <sebm-google-map-marker *ngFor="let coordinate of coordinates"
-                                  [latitude]="coordinate.location.latitude"
-                                  [longitude]="coordinate.location.longitude"
-                                  [iconUrl]="gmapsSettings.icon">
-          </sebm-google-map-marker>
+            <div *ngFor="let coordinate of coordinates">
+                <sebm-google-map-marker *ngIf="dateComparedToNow(coordinate) === 'past'"
+                                        [latitude]="coordinate.location.latitude"
+                                        [longitude]="coordinate.location.longitude"
+                                        [iconUrl]="'/assets/icons/gisela_ico_past.png'">
+                </sebm-google-map-marker>
+                <sebm-google-map-marker *ngIf="dateComparedToNow(coordinate) === 'future'"
+                                        [latitude]="coordinate.location.latitude"
+                                        [longitude]="coordinate.location.longitude"
+                                        [iconUrl]="'/assets/icons/gisela_ico_future.png'">
+                </sebm-google-map-marker>
+                <sebm-google-map-marker *ngIf="dateComparedToNow(coordinate) === 'active'"
+                                        [latitude]="coordinate.location.latitude"
+                                        [longitude]="coordinate.location.longitude"
+                                        [iconUrl]="'/assets/icons/gisela_ico_active.png'">
+                </sebm-google-map-marker>
+            </div>
         </sebm-google-map>
     </div>
 </div>
