@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {DataService} from '../api/data.service';
 import {GiselaDataModel} from "../api/datamodels.model";
 import moment = require('moment');
+import {MapTypeStyle} from "angular2-google-maps/esm/core";
+import {Http} from "@angular/http";
 
 /**
  * This class represents the lazy loaded GMapsComponent.
@@ -15,19 +17,23 @@ import moment = require('moment');
 })
 export class GMapsComponent {
 
-    constructor(private dataService: DataService) {
-        // listen for changes of positions delivered by DataService
-        dataService.positionsChanged.subscribe((positions: GiselaDataModel[]) => {
-            this.coordinates = positions;
-        })
-    }
-
+    private mapStyle: MapTypeStyle[] = [];
 
     /**
      * array with all the locations where gisela has been
      * @type {Array}
      */
     private coordinates: GiselaDataModel[] = [];
+
+    constructor(private dataService: DataService,
+        private http: Http) {
+        // listen for changes of positions delivered by DataService
+        dataService.positionsChanged.subscribe((positions: GiselaDataModel[]) => {
+            this.coordinates = positions;
+        })
+        http.get('../../../assets/mapStyle.json').subscribe(response => this.mapStyle = response.json(),
+            error => console.log('An error occurred while loading the map style json'));
+    }
 
 
     /**
