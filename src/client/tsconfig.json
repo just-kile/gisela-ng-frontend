@@ -15,7 +15,7 @@
         "noImplicitReturns": true,
         "noImplicitUseStrict": false,
         "noFallthroughCasesInSwitch": true,
-        "lib": ["dom", "es6"],
+        "lib": ["dom", "es5"],
         "typeRoots": [
             "../../node_modules/@types",
             "../../node_modules"
